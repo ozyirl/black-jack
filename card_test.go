@@ -30,3 +30,11 @@ func TestNew (t *testing.T){
 
 	
 }
+
+func TestDefaultSort(t *testing.T){
+	cards := New(DefaultSort)
+	expected := Card{Suit: Spade, Rank: Ace}
+	if cards[0] != expected {
+		t.Errorf("Expected Ace of Spades, got %v", cards[0])
+	}
+}
