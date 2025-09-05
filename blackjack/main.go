@@ -9,7 +9,6 @@ import (
 
 
 func cardToASCII(card deck.Card) string {
-
 	var suit string
 	switch card.Suit.String() {
 	case "Spade":
@@ -23,7 +22,6 @@ func cardToASCII(card deck.Card) string {
 	default:
 		suit = "?"
 	}
-	
 
 	var rank string
 	switch card.Rank.String() {
@@ -56,11 +54,14 @@ func cardToASCII(card deck.Card) string {
 	default:
 		rank = card.Rank.String()
 	}
-	
 
-	return fmt.Sprintf("┌─────┐\n│%s    │\n│  %s  │\n│    %s│\n└─────┘", 
+	
+	rank = fmt.Sprintf("%-2s", rank)
+
+	return fmt.Sprintf("┌──────┐\n│%s    │\n│  %-2s  │\n│    %s│\n└──────┘",
 		rank, suit, rank)
 }
+
 
 
 func displayHand(cards []deck.Card, title string) {
@@ -88,19 +89,39 @@ func displayHand(cards []deck.Card, title string) {
 	fmt.Println()
 }
 
+
+type Hand []deck.Card
+
+
+func (h Hand) String() string {
+	strs := make([]string,len(h))
+	for i := range h {
+		strs[i] = h[i].String()
+	}
+	return strings.Join(strs,", ")
+}
+
 func main() {
  
     cards := deck.New(
-        deck.Deck(6),    
+        deck.Deck(3),    
         deck.Shuffle,    
     )
-    
+
+	// var card deck.Card
+    // for i:= 0; i< 10 ; i++ {
+	// 	card,cards = cards[0],cards[1:]
+	// 	displayHand([]deck.Card{card}, fmt.Sprintf("Card %d:", i+1))
+	// }
+
+	var h Hand = cards[0:3]
+	displayHand(h, "Hand:")
   
-    playerHand := []deck.Card{cards[0], cards[2]}
-    dealerHand := []deck.Card{cards[1], cards[3]}
+    // playerHand := []deck.Card{cards[0], cards[2]}
+    // dealerHand := []deck.Card{cards[1], cards[3]}
     
      
 
-    displayHand(playerHand, "Player Hand:")
-    displayHand(dealerHand, "Dealer Hand:")
+    // displayHand(playerHand, "Player Hand:")
+    // displayHand(dealerHand, "Dealer Hand:")
 }
