@@ -1,3 +1,3 @@
-module github.com/ozyirl/playing-cards
+module github.com/ozyirl/gojack
 
 go 1.23.2
