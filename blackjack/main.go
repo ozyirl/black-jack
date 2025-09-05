@@ -108,20 +108,21 @@ func main() {
         deck.Shuffle,    
     )
 
-	// var card deck.Card
-    // for i:= 0; i< 10 ; i++ {
-	// 	card,cards = cards[0],cards[1:]
-	// 	displayHand([]deck.Card{card}, fmt.Sprintf("Card %d:", i+1))
-	// }
-
-	var h Hand = cards[0:3]
-	displayHand(h, "Hand:")
-  
-    // playerHand := []deck.Card{cards[0], cards[2]}
-    // dealerHand := []deck.Card{cards[1], cards[3]}
+	var card deck.Card
+   
+	var player, dealer Hand
+for i :=0; i<2; i++ {
+	for _, hand := range []*Hand{&player, &dealer} {
+		card, cards = draw(cards)
+		*hand = append(*hand, card)
+		
+	}
+}
+	displayHand(player, "Player Hand:")
+	displayHand(dealer, "Dealer Hand:")
     
-     
+}
 
-    // displayHand(playerHand, "Player Hand:")
-    // displayHand(dealerHand, "Dealer Hand:")
+func draw(card []deck.Card) (deck.Card, []deck.Card) {
+	return card[0], card[1:]
 }
