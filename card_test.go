@@ -38,3 +38,42 @@ func TestDefaultSort(t *testing.T){
 		t.Errorf("Expected Ace of Spades, got %v", cards[0])
 	}
 }
+
+
+func TestJokers(t *testing.T){
+	cards := New(Jokers(3))
+	count := 0
+	for _,c:= range cards{
+		if c.Suit == Joker {
+			count ++
+		}
+	}
+
+
+	if count != 3 {
+		t.Error("Expected 3 jokers, got")
+	}
+}
+
+
+func TestFilter(t *testing.T){
+	filter :=func(card Card) bool {
+		return card.Rank == Two || card.Rank == Three
+	}
+
+	cards := New(Filter(filter))
+	for _,c := range cards {
+		if c.Rank == Two || c.Rank == Three {
+			t.Error("expected twos and threes")
+		}
+	}
+}
+
+
+func TestDeck(t *testing.T){
+	cards := New(Deck(3))
+	//13 ranks * 4 suits * 3 decks
+	if len(cards) != 13 * 4 * 3{
+		t.Errorf("Expected %d cards, recieved %d cards", 13*4*3, len(cards))
+	}
+}
