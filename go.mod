@@ -1,3 +1,3 @@
-module github.com/ozyftw/playing-cards
+module github.com/ozyirl/playing-cards
 
 go 1.23.2

@@ -17,7 +17,7 @@ package main
 
 import (
     "fmt"
-    "github.com/ozyftw/gojack/deck"
+    "github.com/ozyirl/playing-cards/deck"
 )
 
 func main() {
@@ -115,7 +115,7 @@ package main
 
 import (
     "fmt"
-    "github.com/ozyftw/gojack/deck"
+    "github.com/ozyirl/playing-cards/deck"
 )
 
 func main() {
