@@ -5,7 +5,7 @@ A Go package for creating and manipulating playing card decks, perfect for card 
 ## Installation
 
 ```bash
-go get github.com/ozyirl/playing-cards
+go get github.com/ozyirl/gojack
 ```
 
 ## Usage
@@ -17,7 +17,7 @@ package main
 
 import (
     "fmt"
-    "github.com/ozyirl/playing-cards/deck"
+    "github.com/ozyirl/gojack/deck"
 )
 
 func main() {
