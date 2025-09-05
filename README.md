@@ -5,7 +5,7 @@ A Go package for creating and manipulating playing card decks, perfect for card 
 ## Installation
 
 ```bash
-go get github.com/ozyftw/playing-cards
+go get github.com/ozyirl/playing-cards
 ```
 
 ## Usage
