@@ -1,12 +1,15 @@
-# GoJack - Playing Card Deck Package
+# GoJack ♠️ ♦️ ♣️ ♥️ - Playing Card Deck Package
 
-A Go package for creating and manipulating playing card decks, perfect for card games like Blackjack.
+A Go package for cards. Not just any cards — your deck, your rules.
+Blackjack, Poker, Rummy, test harnesses, whatever. GoJack is the engine that deals, shuffles, and stacks like a casino-grade shoe.
 
 ## Installation
 
 ```bash
 go get github.com/ozyirl/gojack
 ```
+
+Pull it down. Build your table. Let’s go.
 
 ## Usage
 
@@ -31,9 +34,11 @@ func main() {
 }
 ```
 
+Minimal. Precise. Weaponized simplicity.
+
 ### Deck Options
 
-The `New()` function accepts functional options to customize your deck:
+GoJack runs on options — stack them, combine them, bend the game to your will.
 
 ```go
 // Create a shuffled deck
@@ -62,7 +67,11 @@ cards := deck.New(
 )
 ```
 
+Every option is a lever. Pull it.
+
 ### Custom Sorting
+
+You’re not stuck with defaults. You want a table that runs your order? Write it.
 
 ```go
 // Use custom sort function
@@ -74,6 +83,8 @@ customSort := deck.Sort(func(cards []deck.Card) func(i, j int) bool {
 })
 cards := deck.New(customSort)
 ```
+
+Not just sorting. Reprogramming the deck.
 
 ## Types
 
@@ -134,6 +145,8 @@ func main() {
 }
 ```
 
+You’re not just printing cards. You’re simulating the pit.
+
 ## Testing
 
 Run the tests with:
@@ -147,3 +160,10 @@ Run with verbose output:
 ```bash
 go test -v
 ```
+
+Why GoJack?
+
+Because the world didn’t need another boring deck implementation.
+It needed this — lean, sharp, production-ready.
+GoJack is not about cards. It’s about control.
+You’re not coding games. You’re running casinos.
