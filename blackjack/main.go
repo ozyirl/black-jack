@@ -105,6 +105,24 @@ func (h Hand) DealerString() string {
 	return h[0].String() + ", **Hidden**"
 }
 
+func (h Hand) MinScore() int {
+	score := 0 
+
+	for _,c := range h {
+		score += min(int(c.Rank),10)
+
+
+	}
+	return score
+}
+
+
+func min(a,b int) int {
+	if a < b {
+		return a
+	}
+	return b
+}
 
 func main() {
  
@@ -126,23 +144,34 @@ func main() {
 
 	var input string
 	for input != "s"{
-		displayHand(player, "Player Hand:")
+		displayHand(player, fmt.Sprintf("Player Hand: %d", player.MinScore()))
 		fmt.Println("-------------------------------- Dealer Hand --------------------------------")
 		displayHand([]deck.Card{dealer[0]}, dealer.DealerString())
 
 		fmt.Println("Enter 's' to stand, 'h' to hit")
 		fmt.Scanf("%s", &input)
-switch input {
-	case "h":
-		card, cards = draw(cards)
-		player = append(player, card)
+		switch input {
+		case "h":
+			card, cards = draw(cards)
+			player = append(player, card)
+		}
 
+		if player.MinScore() > 21 {
+			fmt.Println("Player busts")
+			break
+		}
 	}
+
+	
 	fmt.Println("==Final Hands==")
-	displayHand(player, "Player Hand:")
-	fmt.Println("-------------------------------- Dealer Hand --------------------------------")
-	displayHand(dealer, "Dealer Hand:")
+	for dealer.MinScore() < 17 {
+		card, cards = draw(cards)
+		dealer = append(dealer, card)
 	}
+	
+	displayHand(player, fmt.Sprintf("Player Hand: %d", player.MinScore()))
+	fmt.Println("-------------------------------- Dealer Hand --------------------------------")
+	displayHand(dealer, fmt.Sprintf("Dealer Hand: %d", dealer.MinScore()))
 
 	
     
