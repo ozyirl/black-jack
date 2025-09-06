@@ -101,6 +101,11 @@ func (h Hand) String() string {
 	return strings.Join(strs,", ")
 }
 
+func (h Hand) DealerString() string {
+	return h[0].String() + ", **Hidden**"
+}
+
+
 func main() {
  
     cards := deck.New(
@@ -111,15 +116,35 @@ func main() {
 	var card deck.Card
    
 	var player, dealer Hand
-for i :=0; i<2; i++ {
+	for i :=0; i<2; i++ {
 	for _, hand := range []*Hand{&player, &dealer} {
 		card, cards = draw(cards)
 		*hand = append(*hand, card)
 		
 	}
 }
+
+	var input string
+	for input != "s"{
+		displayHand(player, "Player Hand:")
+		fmt.Println("-------------------------------- Dealer Hand --------------------------------")
+		displayHand([]deck.Card{dealer[0]}, dealer.DealerString())
+
+		fmt.Println("Enter 's' to stand, 'h' to hit")
+		fmt.Scanf("%s", &input)
+switch input {
+	case "h":
+		card, cards = draw(cards)
+		player = append(player, card)
+
+	}
+	fmt.Println("==Final Hands==")
 	displayHand(player, "Player Hand:")
+	fmt.Println("-------------------------------- Dealer Hand --------------------------------")
 	displayHand(dealer, "Dealer Hand:")
+	}
+
+	
     
 }
 
