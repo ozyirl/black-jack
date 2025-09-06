@@ -105,6 +105,20 @@ func (h Hand) DealerString() string {
 	return h[0].String() + ", **Hidden**"
 }
 
+func (h Hand) Score() int {
+	minScore := h.MinScore()
+	if minScore > 11{
+		return minScore
+	}
+	for _,c := range h {
+		if c.Rank == deck.Ace {
+			return minScore + 10
+		}
+	}
+	return minScore
+}
+
+
 func (h Hand) MinScore() int {
 	score := 0 
 
@@ -156,22 +170,44 @@ func main() {
 			player = append(player, card)
 		}
 
-		if player.MinScore() > 21 {
-			fmt.Println("Player busts")
-			break
-		}
+		
 	}
 
-	
-	fmt.Println("==Final Hands==")
-	for dealer.MinScore() < 17 {
+	for dealer.Score() <= 16 || (dealer.Score() == 17 && dealer.MinScore() != 17) {
 		card, cards = draw(cards)
 		dealer = append(dealer, card)
 	}
 	
-	displayHand(player, fmt.Sprintf("Player Hand: %d", player.MinScore()))
+	pScore, dScore := player.Score(), dealer.Score()
+	fmt.Println("==Final Hands==")
+	
+
+	// if dealer.Score() == player.Score() {
+	// 	fmt.Println("==Push==")
+	// } else if dealer.Score() > player.Score() {
+	// 	fmt.Println("==Dealer Wins==")
+	// } else {
+	// 	fmt.Println("==Player Wins==")
+	// }
+	
+	displayHand(player, fmt.Sprintf("Player Hand: %d", pScore))
 	fmt.Println("-------------------------------- Dealer Hand --------------------------------")
-	displayHand(dealer, fmt.Sprintf("Dealer Hand: %d", dealer.MinScore()))
+	displayHand(dealer, fmt.Sprintf("Dealer Hand: %d", dScore))
+
+	switch {
+		case player.Score() > 21:
+			fmt.Println("Player busts")
+			return
+		case dealer.Score() > 21:
+			fmt.Println("Dealer busts")
+			return
+		case dealer.Score() == player.Score():
+			fmt.Println("==Push==")
+		case dealer.Score() > player.Score():
+			fmt.Println("==Dealer Wins==")
+		case dealer.Score() < player.Score():
+			fmt.Println("==Player Wins==")
+	}
 
 	
     
